@@ -1,25 +1,24 @@
 // .vitepress/components/home.vue
 <template>
-  <div class="site-wrapper">
-    <header class="main-background">
-    <img src="https://xionzhi.com/content/images/file/DSCF0609.webp" />
-    </header>
+  <div>
+    <ul>
+      <li v-for="article in $site.articles" :key="article">
+        <nuxt-link :to="article">{{ $page.frontmatter.title }}</nuxt-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    url: {
-      type: String,
-      required: true,
-    },
-  },
-  // 请求每日一图
-  methods: {
-
-  },
-};
+  // 获取文章列表
+  async asyncData({ app }) {
+    console.log(articles);
+    return {
+      articles: app.articles
+    }
+  }
+}
 </script>
 
 <style>

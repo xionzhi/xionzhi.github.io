@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   base: '/',
   title: 'Xionzhi Github Io',
   description: '',
@@ -12,7 +12,6 @@ export default {
       { text: "Contact", link: "/contact" },
       { text: "Guide", link: "/guide" },
       { text: "About", link: "/about" },
-      { text: "Test", link: "/posts/test" },
     ],
     socialLinks: [
       { icon: "github", link: "https://github.com/xionzhi/xionzhi.github.io" },
