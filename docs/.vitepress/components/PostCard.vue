@@ -1,8 +1,7 @@
 // .vitepress/components/PostCard.vue
 <template>
-  <div v-for="item in PostDocs" :key="item.link" class="docs">
+  <div v-for="item in PostDocs.slice().reverse()" :key="item.link" class="docs">
     <article class="post">
-
       <!-- 标题 -->
       <header class="post-header">
         <h2 class="post-title">
@@ -25,17 +24,41 @@
       </footer>
     </article>
   </div>
+
+  <!-- 翻页 -->
+  <div v-show="seen" id="hide" class="more-hide">
+    <a href="#" @click="morePost">more</a>
+  </div>
 </template>
 
 <script>
-import PostDocs from './posts.json'
+import PostsArray from './posts.json'
 
 export default{
-    data(){
-        return{
-          PostDocs: PostDocs
-        }
+  created() {
+    this.seen = true
+    this.AllPostDocs = PostsArray
+    this.page = 1
+    this.size = 3
+    this.PostDocs = this.AllPostDocs.slice(-this.size)
+    if(this.PostDocs.length == this.AllPostDocs.length){
+      this.seen = false
     }
+  },
+
+  methods: {
+    morePost() {
+      this.page++;
+      this.PostDocs = this.AllPostDocs.slice(-(this.size * this.page))
+      this.moreSeen();
+    },
+    moreSeen() {
+      if (this.size * this.page >= this.AllPostDocs.length) {
+        this.seen = false
+      }
+      this.$forceUpdate()
+    }
+  }
 }
 </script>
 
@@ -54,4 +77,7 @@ export default{
   font-size:1rem;
 }
 
+.more-hide {
+  text-align: center;
+}
 </style>

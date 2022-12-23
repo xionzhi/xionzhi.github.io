@@ -28,13 +28,13 @@ function readAll(parentPath) {
 readAll('docs/posts')
 
 if(out){
-    // array sort by date desc
+    // array sort by date asc
     out.sort(function(a, b) {
       var keyA = new Date(a.date),
         keyB = new Date(b.date);
       // Compare the 2 dates
-      if (keyA < keyB) return 1;
-      if (keyA > keyB) return -1;
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
       return 0;
     });
     // write json file
