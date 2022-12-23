@@ -1,5 +1,5 @@
 ---
-title: Welcome to My Githun Pages
+title: Welcome to My Github Pages
 ---
 
 Hello and welcome to my site! This is a static site built using [VitePress](https://vitepress.vuejs.org/).
