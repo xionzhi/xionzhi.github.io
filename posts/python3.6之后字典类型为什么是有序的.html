@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>python3.6之后字典类型为什么是有序的 | Xionzhi Github Io</title>
     <meta name="description" content="A VitePress site">
-    <link rel="stylesheet" href="/assets/style.a7636868.css">
-    <link rel="modulepreload" href="/assets/app.a366ee3d.js">
-    <link rel="modulepreload" href="/assets/posts_python3.6之后字典类型为什么是有序的.md.6cb0f0ee.lean.js">
+    <link rel="stylesheet" href="/assets/style.62795a01.css">
+    <link rel="modulepreload" href="/assets/app.06916134.js">
+    <link rel="modulepreload" href="/assets/posts_python3.6之后字典类型为什么是有序的.md.ac4d8eab.lean.js">
     
     <script id="check-dark-light">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
   </head>
@@ -70,8 +70,8 @@
 <span class="line"></span>
 <span class="line"><span style="color:#89DDFF;">-</span><span style="color:#F78C6C;">9092791511155847987</span><span style="color:#A6ACCD;"> </span><span style="color:#89DDFF;">%</span><span style="color:#A6ACCD;"> </span><span style="color:#F78C6C;">8</span><span style="color:#A6ACCD;">  </span><span style="color:#676E95;"># 5</span></span>
 <span class="line"></span></code></pre></div><p>把<code>indices</code>这个一维数组里面，下标为5的位置修改为0。</p><p>这里的0是什么意思呢？0是二维数组<code>entries</code>的索引。现在<code>entries</code>里面的第一项，就是我们刚刚添加的这个键值对的三个数据：<code>timmy</code>的hash值、指向<code>timmy</code>的指针和指向<code>red</code>的指针。</p><p>所以<code>indices</code>里面填写的数字0，就是刚刚我们插入的这个键值对的数据在二维数组里面的行索引。</p><p>最后总结</p><ul><li>key必须是可以hash的，数字字符元组都是可以的，自定义类型要满足(1.支持hash()，2.可以__eq__()判断相等，3. <code>a==b is True and hash(a)==hash(b) is True</code>)</li><li>字典是比较损耗内存的(空间换时间)</li><li>key查询速度非常快</li><li>字典中添加新的key可能会导致容量膨胀，导致哈希表中键的顺序发生变化。因此，不要在遍历时的同时修改字典。</li></ul><p>参考：<br><a href="https://mail.python.org/pipermail/python-dev/2012-December/123028.html" target="_blank" rel="noreferrer">[Python-Dev] More compact dictionaries with faster iteration</a><br><a href="https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-compactdict" target="_blank" rel="noreferrer">[docs.python.org] New dict implementation</a><br><a href="https://docs.python.org/3.11/tutorial/datastructures.html#dictionaries" target="_blank" rel="noreferrer">[docs.python.org] Table of Contents Dictionaries</a><br><a href="https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html" target="_blank" rel="noreferrer">[PyPy]Faster, more memory efficient and more ordered dictionaries on PyPy</a></p></div></div></main><!--[--><!--]--><!----><!--[--><!--]--></div></div></div></div></div><footer class="VPFooter" data-v-f44a984a data-v-9f24cc86><div class="container" data-v-9f24cc86><p class="message" data-v-9f24cc86>Power by Vitepress</p><p class="copyright" data-v-9f24cc86>Copyright © 2022 Xionzhi</p></div></footer><!--[--><!--]--></div></div>
-    <script>__VP_HASH_MAP__ = JSON.parse("{\"about.md\":\"6dc22068\",\"guide.md\":\"9bbb001b\",\"posts_python redis bitmap储存用户签到.md\":\"0c3c634f\",\"contact.md\":\"00cc9402\",\"posts_python标准运算符替代函数operator.md\":\"f5522213\",\"index.md\":\"8ff3408b\",\"posts_python3.6之后字典类型为什么是有序的.md\":\"6cb0f0ee\",\"posts_test.md\":\"7f3380f9\"}")</script>
-    <script type="module" async src="/assets/app.a366ee3d.js"></script>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"contact.md\":\"e5ada181\",\"guide.md\":\"036ce89b\",\"posts_python3.6之后字典类型为什么是有序的.md\":\"ac4d8eab\",\"posts_test.md\":\"e2f85dee\",\"posts_python标准运算符替代函数operator.md\":\"0dfa9b77\",\"posts_iterables(可迭代对象) iterators(迭代器) generators(生成器).md\":\"d2eaf9f6\",\"about.md\":\"1b5a93fe\",\"posts_python redis bitmap储存用户签到.md\":\"572d6ea6\",\"index.md\":\"9ac711db\"}")</script>
+    <script type="module" async src="/assets/app.06916134.js"></script>
     
   </body>
 </html>
