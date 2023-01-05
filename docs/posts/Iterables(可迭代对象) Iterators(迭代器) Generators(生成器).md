@@ -1,23 +1,24 @@
 ---
-title: Iterables(可迭代对象) Iterators(迭代器) Generators(生成器)
+title: 'Iterables(可迭代对象) Iterators(迭代器) Generators(生成器)'
 author: xionzhi
-date: '2022-12-23'
+date: '2023-01-05'
 showAccessNumber: true
 categories:
-  - 测试
+  - python
 tags:
-  - 标签1
-  - 标签2
-  - 标签3
-excerpt: '在python中有许多概念在探究细节差异的时候是容易混淆的，比如:
+  - python
+excerpt: "在python中有许多概念在探究细节差异的时候是容易混淆的，比如:
 
 - a container(容器)
 - an iterable(可迭代对象)
 - an iterator(迭代器)
 - a generator(生成器)
 - a generator expression(各种生成式 列表生成式和字典生成式之类)
-- a {list, set, dict} comprehension(对列表集合字典的理解)'
+- a {list, set, dict} comprehension(对列表集合字典的理解)
+"
 ---
+
+
 
 
 > **翻译来源: [nvie.com/iterators-vs-generators](https://nvie.com/posts/iterators-vs-generators/)**
@@ -366,5 +367,3 @@ def iter_something():
 #     return list(iter_something())
 
 ```
-
-

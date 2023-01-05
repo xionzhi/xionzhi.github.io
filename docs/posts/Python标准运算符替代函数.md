@@ -1,38 +1,14 @@
 ---
-title: Python标准运算符替代函数operator
+title: 'Python标准运算符替代函数'
 author: xionzhi
-date: '2022-12-20'
+date: '2023-01-05'
 showAccessNumber: true
 categories:
-  - 测试
+  - python
 tags:
-  - 标签1
-  - 标签2
-  - 标签3
-excerpt: 'Python标准运算符替代函数operator```python
-# Python 3.8.11
-
+  - python
+excerpt: "
 from operator import *
-
-
-# 1. 绝对值
-abs(100)  # 100
-abs(-100)  # 100
-abs(2j + 1)  # 2.23606797749979, 返回复数的绝对值 (a^2+b^2)**0.5
-
-# 2. 加法
-add(100, 1)  # 101, a + b'
----
-
-[[toc]]
-
-
-
-```python
-# Python 3.8.11
-
-from operator import *
-
 
 # 1. 绝对值
 abs(100)  # 100
@@ -44,7 +20,34 @@ add(100, 1)  # 101, a + b
 
 # 3. 按位与
 and_(True, [1])  # 1, a & b
-and_({1, 2, 3}, {2, 3, 4})  # {2, 3},
+and_({1,2,3}, {2,3,4})  # {2, 3}, 
+
+# 4. 连接
+concat('abc', '123')  # abc123, seq1 + seq2
+concat([1, 2], [3])  # [1,2,3]
+
+# 5. 包含检测
+contains([1, 2], 1)  # True, obj in seq
+"
+---
+
+
+
+
+```python
+from operator import *
+
+# 1. 绝对值
+abs(100)  # 100
+abs(-100)  # 100
+abs(2j + 1)  # 2.23606797749979, 返回复数的绝对值 (a^2+b^2)**0.5
+
+# 2. 加法
+add(100, 1)  # 101, a + b
+
+# 3. 按位与
+and_(True, [1])  # 1, a & b
+and_({1,2,3}, {2,3,4})  # {2, 3}, 
 
 # 4. 连接
 concat('abc', '123')  # abc123, seq1 + seq2
@@ -85,7 +88,7 @@ test2 = iadd(test, ['e'])  # test += ['e'], test -> ['a','b','c','e'], id(test2)
 test1 = add(test, ['e'])  # diff add, test -> ['a','b','c'], id(test) != id(test1)
 
 # 14. 原地按位与
-a, b = {1, 2, 3}, {2, 3, 4}
+a, b = {1,2,3}, {2,3,4}
 a1 = iand(a, b)  # a &= b, a -> {2, 3}, diff and_ id(a1) == id(a)
 
 # 15. 原地连接
@@ -97,7 +100,7 @@ a, b = 10, 3
 ifloordiv(a, b)  # a //= b, a -> 3
 
 # 17. 原地左移
-a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11'
+a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11' 
 ilshift(a, b)  # a <<= b, a -> '0b101000'
 lshift(0, 100)  # 0
 
@@ -122,7 +125,7 @@ index(a)  # 8
 type(index(a))  # <class 'int'>
 
 # 22. 索引查询
-indexOf([1, 2, 3, 4], 2)  # 1, first index of b in a
+indexOf([1,2,3,4], 2)  # 1, first index of b in a
 
 # 23. 按位求反
 inv(1)  # -2, ~1, bin(1), bin(-2) -> '0b1', '-0b10', 0000000000000001, 1111111111111110
@@ -137,7 +140,7 @@ a, b = 2, 10
 ipow(a, b)  # 1024, a **= b
 
 # 26. 原地右移
-a, b = 10, 1  # bin(10) -> '0b1010', bin(1) -> '0b1'
+a, b = 10, 1  # bin(10) -> '0b1010', bin(1) -> '0b1' 
 irshift(a, b)  # a >>= b, a -> '0b101', 5
 rshift(1024, 1)  # 512
 
@@ -173,7 +176,7 @@ length_hint('abc')  # 3
 length_hint(None, 2)  # 2, not length return 2
 
 # 34. 左移
-a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11'
+a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11' 
 lshift(a, b)  # a << b, a -> '0b101000'
 lshift(0, 100)  # 0
 
@@ -215,20 +218,20 @@ a, b = 2, 10
 pow(a, b)  # 1024, a ** b
 
 # 45. 左移
-a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11'
+a, b = 5, 3  # bin(5) -> '0b101', bin(3) -> '0b11' 
 lshift(a, b)  # a << b, a -> '0b101000'
 lshift(0, 100)  # 0
 
 # 46. 切片赋值
 seq = []
-setitem(seq, slice(0, 3), [1, 2, 3])  # seq -> seq
-# setitem(seq, slice(i, j), values)
+setitem(seq, slice(0, 3), [1,2,3])  # seq -> seq
+setitem(seq, slice(i, j), values)
 
 # 47. 减法
 sub(10, 2)  # 8, a - b
 
 # 48. 除法
-truediv(10, 4)  # 2.5, a / b
+truediv(10. 4)  # 2.5, a / b
 
 # 49. 真值检测
 truth([])  # False
@@ -244,7 +247,7 @@ xor(a, b)  # 0b1, a ^ b
 
 
 
-### attrgetter
+## attrgetter
 
 返回一个可从操作数中获取 *attr* 的可调用对象。 如果请求了一个以上的属性，则返回一个属性元组。 属性名称还可包含点号。 例如：
 
@@ -271,31 +274,9 @@ def resolve_attr(obj, attr):
     return obj
 ```
 
-排序用法
-
-```python
-class Student:
-    def __init__(self, name, grade, age):
-        self.name = name
-        self.grade = grade
-        self.age = age
-
-    def __repr__(self):
-        return repr((self.name, self.grade, self.age))
 
 
-student_objects = [
-    Student('john', 'A', 15),
-    Student('jane', 'B', 12),
-    Student('dave', 'B', 10),
-]
-
-sorted(student_objects, key=lambda student: student.age)
-# [('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
-```
-
-
-### itemgetter
+## itemgetter
 
 返回一个使用操作数的 [`__getitem__()`](https://docs.python.org/zh-cn/3.8/library/operator.html#operator.__getitem__) 方法从操作数中获取 *item* 的可调用对象。 如果指定了多个条目，则返回一个查找值的元组。 例如：
 
@@ -382,7 +363,7 @@ itemgetter('rank')(soldier)
 
 
 
-### methodcaller
+## methodcaller
 
 返回一个在操作数上调用 *name* 方法的可调用对象。 如果给出额外的参数和/或关键字参数，它们也将被传给该方法。 例如：
 
@@ -396,5 +377,5 @@ def methodcaller(name, /, *args, **kwargs):
     return caller
 ```
 
-参考：<br>
-[[Python Docs] operator — Standard operators as functions](https://docs.python.org/3/library/operator.html)
+
+

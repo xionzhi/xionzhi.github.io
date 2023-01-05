@@ -39,7 +39,7 @@ export default{
     this.seen = true
     this.AllPostDocs = PostsArray
     this.page = 1
-    this.size = 3
+    this.size = 5
     this.PostDocs = this.AllPostDocs.slice(-this.size)
     if(this.PostDocs.length == this.AllPostDocs.length){
       this.seen = false

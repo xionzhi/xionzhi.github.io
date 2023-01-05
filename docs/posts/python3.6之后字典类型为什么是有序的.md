@@ -1,18 +1,17 @@
 ---
-title: python3.6之后字典类型为什么是有序的
+title: 'python3.6之后字典类型为什么是有序的'
 author: xionzhi
-date: '2022-12-19'
+date: '2023-01-05'
 showAccessNumber: true
 categories:
-  - 测试
+  - python
 tags:
-  - 标签1
-  - 标签2
-  - 标签3
-excerpt: '有序字典设计使用基于[**Raymond Hettinger**](https://mail.python.org/pipermail/python-dev/2012-December/123028.html) 提出的`More compact dictionaries with faster iteration`， 最开始由 [**PyPy**](https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html) 实现。`dict()`与 `Python 3.5` 相比，新版本的内存使用量减少了`20%` 到 `25%`，从 `Python 3.8` 开始，字典还支持反向迭代`reversed`。'
+  - python
+excerpt: "有序字典设计使用基于[**Raymond Hettinger**](https://mail.python.org/pipermail/python-dev/2012-December/123028.html) 提出的`More compact dictionaries with faster iteration`， 最开始由 [**PyPy**](https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html) 实现。`dict()`与 `Python 3.5` 相比，新版本的内存使用量减少了`20%` 到 `25%`，从 `Python 3.8` 开始，字典还支持反向迭代`reversed`。"
 ---
 
-[[toc]]
+
+
 
 有序字典设计使用基于[**Raymond Hettinger**](https://mail.python.org/pipermail/python-dev/2012-December/123028.html) 提出的`More compact dictionaries with faster iteration`， 最开始由 [**PyPy**](https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html) 实现。`dict()`与 `Python 3.5` 相比，新版本的内存使用量减少了`20%` 到 `25%`，从 `Python 3.8` 开始，字典还支持反向迭代`reversed`。
 
@@ -34,7 +33,7 @@ for k, v in reversed(tel.items())
 ```
 
 在之前版本中(python3.5)，PyPy字典以及CPython字典的实现如下（简化视图）
-```c
+```c++
 /* python3.5 */
 struct dict {
    long num_items;
@@ -104,9 +103,9 @@ hash('timmy')  # -9092791511155847987
 - key查询速度非常快
 - 字典中添加新的key可能会导致容量膨胀，导致哈希表中键的顺序发生变化。因此，不要在遍历时的同时修改字典。
 
-
 参考：<br>
 [[Python-Dev] More compact dictionaries with faster iteration](https://mail.python.org/pipermail/python-dev/2012-December/123028.html)<br>
 [[docs.python.org] New dict implementation](https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-compactdict)<br/>
 [[docs.python.org] Table of Contents Dictionaries](https://docs.python.org/3.11/tutorial/datastructures.html#dictionaries)<br />
 [[PyPy]Faster, more memory efficient and more ordered dictionaries on PyPy](https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html)
+
