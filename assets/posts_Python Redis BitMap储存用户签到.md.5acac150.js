@@ -1,53 +1,43 @@
-import{_ as s,o as n,c as a,a as l}from"./app.06916134.js";const i=JSON.parse('{"title":"Python Redis BitMap储存用户签到","description":"","frontmatter":{"title":"Python Redis BitMap储存用户签到","author":"xionzhi","date":"2022-12-21","showAccessNumber":true,"categories":["测试"],"tags":["标签1","标签2","标签3"],"excerpt":"Redis提供的数据类型位图`BitMap`，每个`bit`位对应`0`和`1`两个状态。虽然内部还是采用`String`类型存储，但Redis提供了一些指令用于直接操作`BitMap`，可以把它看作一个`bit`数组，数组的下标就是偏移量。\\n它的优点是内存开销小，效率高且操作简单，很适合用于签到这类场景。缺点在于位计算和位表示数值的局限。如果要用位来做业务数据记录，就不要在意value的值。"},"headers":[],"relativePath":"posts/Python Redis BitMap储存用户签到.md"}'),p={name:"posts/Python Redis BitMap储存用户签到.md"},o=l(`<nav class="table-of-contents"><ul></ul></nav><p>Redis提供的数据类型位图<code>BitMap</code>，每个<code>bit</code>位对应<code>0</code>和<code>1</code>两个状态。虽然内部还是采用<code>String</code>类型存储，但Redis提供了一些指令用于直接操作<code>BitMap</code>，可以把它看作一个<code>bit</code>数组，数组的下标就是偏移量。</p><p>它的优点是内存开销小，效率高且操作简单，很适合用于签到这类场景。缺点在于位计算和位表示数值的局限。如果要用位来做业务数据记录，就不要在意value的值。</p><h4 id="bitmap指令说明" tabindex="-1">bitmap指令说明 <a class="header-anchor" href="#bitmap指令说明" aria-hidden="true">#</a></h4><ol><li><p><strong>BITCOUNT</strong></p><p>计算给定字符串中，被设置为 1 的比特位的数量</p></li><li><p><strong>BITFIELD</strong></p><p>在一次调用中同时对多个位范围进行操作</p></li><li><p><strong>BITFIELD_RO</strong></p><p>BITFIELD的只读版本，redis&gt;=6.0</p></li><li><p><strong>BITOP</strong></p><p>对一个或多个保存二进制位的字符串 key 进行位元操作</p></li><li><p><strong>BITPOS</strong></p><p>返回位图中第一个值为 bit 的二进制位的位置</p></li><li><p><strong>GETBIT</strong></p><p>对 key 所储存的字符串值，获取指定偏移量上的位(bit)</p></li><li><p><strong>SETBIT</strong></p><p>对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)</p></li></ol><h4 id="关于签到实现" tabindex="-1">关于签到实现 <a class="header-anchor" href="#关于签到实现" aria-hidden="true">#</a></h4><p>如果按年存储，Key的格式为 <code>u:sign:{uid}:{yyyy}</code>，value最大长度为<code>46字节</code>(368位)闰年天数为<code>366</code>天。</p><p>如果每月要重置连续签到次数，最简单的方式是按用户每月存一条签到数据。Key的格式为 <code>u:sign:{uid}:{yyyyMM}</code>，而Value则采用长度为<code>4个字节</code>的(32位)最大月份天数是<code>31</code>天。</p><p><code>BitMap</code>的每一位代表一天的签到，<code>1</code>表示已签，<code>0</code>表示未签。</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki"><code><span class="line"><span style="color:#676E95;"># 偏移量OFFSET是从0开始的 实际操作日期减1</span></span>
+import{_ as s,o as n,c as a,a as p}from"./app.06916134.js";const i=JSON.parse('{"title":"Python Redis BitMap储存用户签到","description":"","frontmatter":{"title":"Python Redis BitMap储存用户签到","author":"xionzhi","date":"2023-01-05","showAccessNumber":true,"categories":["python"],"tags":["python"],"excerpt":"Redis提供的数据类型位图BitMap，每个bit位对应0和1两个状态。虽然内部还是采用String类型存储，但Redis提供了一些指令用于直接操作BitMap，可以把它看作一个bit数组，数组的下标就是偏移量。\\n它的优点是内存开销小，效率高且操作简单，很适合用于签到这类场景。缺点在于位计算和位表示数值的局限。如果要用位来做业务数据记录，就不要在意value的值。 "},"headers":[{"level":3,"title":"bitmap指令说明","slug":"bitmap指令说明","link":"#bitmap指令说明","children":[]},{"level":3,"title":"关于签到实现","slug":"关于签到实现","link":"#关于签到实现","children":[]},{"level":3,"title":"python代码实现","slug":"python代码实现","link":"#python代码实现","children":[]}],"relativePath":"posts/Python Redis BitMap储存用户签到.md"}'),l={name:"posts/Python Redis BitMap储存用户签到.md"},o=p(`<p>Redis提供的数据类型位图BitMap，每个bit位对应0和1两个状态。虽然内部还是采用String类型存储，但Redis提供了一些指令用于直接操作BitMap，可以把它看作一个bit数组，数组的下标就是偏移量。</p><p>它的优点是内存开销小，效率高且操作简单，很适合用于签到这类场景。缺点在于位计算和位表示数值的局限。如果要用位来做业务数据记录，就不要在意value的值。</p><h3 id="bitmap指令说明" tabindex="-1">bitmap指令说明 <a class="header-anchor" href="#bitmap指令说明" aria-hidden="true">#</a></h3><ol><li><p>BITCOUNT</p><p>计算给定字符串中，被设置为 1 的比特位的数量</p></li><li><p>BITFIELD</p><p>在一次调用中同时对多个位范围进行操作</p></li><li><p>BITFIELD_RO</p><p>BITFIELD的只读版本，redis&gt;=6.0</p></li><li><p>BITOP</p><p>对一个或多个保存二进制位的字符串 key 进行位元操作</p></li><li><p>BITPOS</p><p>返回位图中第一个值为 bit 的二进制位的位置</p></li><li><p>GETBIT</p><p>对 key 所储存的字符串值，获取指定偏移量上的位(bit)</p></li><li><p>SETBIT</p><p>对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)</p></li></ol><h3 id="关于签到实现" tabindex="-1">关于签到实现 <a class="header-anchor" href="#关于签到实现" aria-hidden="true">#</a></h3><p>如果按年存储，Key的格式为 u:sign:{uid}:{yyyy}，value最大长度为46字节(368位)闰年天数为366天。</p><p>如果每月要重置连续签到次数，最简单的方式是按用户每月存一条签到数据。Key的格式为 u:sign:{uid}:{yyyyMM}，而Value则采用长度为4个字节的(32位)最大月份天数是31天。</p><p>BitMap的每一位代表一天的签到，1表示已签，0表示未签。</p><div class="language-tex"><button title="Copy Code" class="copy"></button><span class="lang">tex</span><pre class="shiki"><code><span class="line"><span style="color:#A6ACCD;"># 偏移量OFFSET是从0开始的 实际操作日期减1</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 设置2022年10月21日签到</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 设置2022年10月21日签到</span></span>
 <span class="line"><span style="color:#A6ACCD;">SETBIT u:sign:1:202210 20 1</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 查询2022年10月21日是否签到</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 查询2022年10月21日是否签到</span></span>
 <span class="line"><span style="color:#A6ACCD;">GETBIT u:sign:1:202210 20</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 统计10月的总签到次数</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 统计10月的总签到次数</span></span>
 <span class="line"><span style="color:#A6ACCD;">BITCOUNT u:sign:1:202210</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 获取10月的签到详情</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 获取10月的签到详情</span></span>
 <span class="line"><span style="color:#A6ACCD;">BITFIELD u:sign:1:202210 GET u31 0</span></span>
 <span class="line"><span style="color:#A6ACCD;">BITFIELD_RO u:sign:1:202210 GET u31 0</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 获取10月最早签到日期 未签到日期</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 获取10月最早签到日期 未签到日期</span></span>
 <span class="line"><span style="color:#A6ACCD;">BITPOS u:sign:1:202210 1</span></span>
 <span class="line"><span style="color:#A6ACCD;">BITPOS u:sign:1:202210 0</span></span>
 <span class="line"></span>
-<span class="line"></span></code></pre></div><h4 id="位图运算原理" tabindex="-1">位图运算原理 <a class="header-anchor" href="#位图运算原理" aria-hidden="true">#</a></h4><p>bit数据右移1位再左移1位可以得到什么？</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki"><code><span class="line"><span style="color:#676E95;"># 二进制数据511</span></span>
+<span class="line"></span></code></pre></div><h3 id="python代码实现" tabindex="-1">python代码实现 <a class="header-anchor" href="#python代码实现" aria-hidden="true">#</a></h3><p>bit数据右移1位再左移1位可以得到什么？</p><div class="language-tex"><button title="Copy Code" class="copy"></button><span class="lang">tex</span><pre class="shiki"><code><span class="line"><span style="color:#A6ACCD;"># 二进制数据511</span></span>
 <span class="line"><span style="color:#A6ACCD;">111111111</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 右移1位</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 右移1位</span></span>
 <span class="line"><span style="color:#A6ACCD;">011111111</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 再左移1位</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 再左移1位</span></span>
 <span class="line"><span style="color:#A6ACCD;">111111110</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 右移再左移与原数据不同，可以判断最后一位数据是1，即已签到</span></span>
-<span class="line"></span>
-<span class="line"></span></code></pre></div><p>未签到状态</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki"><code><span class="line"><span style="color:#676E95;"># 二进制数据510</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 右移再左移与原数据不同，可以得到最后一位数据是1，即已签到</span></span>
+<span class="line"></span></code></pre></div><p>未签到状态</p><div class="language-tex"><button title="Copy Code" class="copy"></button><span class="lang">tex</span><pre class="shiki"><code><span class="line"><span style="color:#A6ACCD;"># 二进制数据510</span></span>
 <span class="line"><span style="color:#A6ACCD;">111111110</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 右移1位</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 右移1位</span></span>
 <span class="line"><span style="color:#A6ACCD;">011111111</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 再左移1位</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 再左移1位</span></span>
 <span class="line"><span style="color:#A6ACCD;">111111110</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 右移再左移与原数据相同，可以判断最后一位数据是0，即已未签到</span></span>
-<span class="line"></span>
-<span class="line"></span></code></pre></div><p>原地右移之后最后一位则是前一天的签到状态</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki"><code><span class="line"><span style="color:#676E95;"># 连续的签到数据</span></span>
-<span class="line"><span style="color:#A6ACCD;">101010101</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#676E95;"># 原地右移 v &gt;&gt;= 1</span></span>
-<span class="line"><span style="color:#A6ACCD;">10101010</span></span>
-<span class="line"><span style="color:#A6ACCD;">1010101</span></span>
-<span class="line"><span style="color:#A6ACCD;">101010</span></span>
-<span class="line"><span style="color:#A6ACCD;">10101</span></span>
-<span class="line"></span></code></pre></div><h4 id="python代码实现" tabindex="-1">python代码实现 <a class="header-anchor" href="#python代码实现" aria-hidden="true">#</a></h4><div class="language-python"><button title="Copy Code" class="copy"></button><span class="lang">python</span><pre class="shiki"><code><span class="line"><span style="color:#89DDFF;">&quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"># 右移再左移与原数据不同，可以得到最后一位数据是0，即已未签到</span></span>
+<span class="line"></span></code></pre></div><p>原地右移之后最后一位则是前一天的签到状态</p><div class="language-python"><button title="Copy Code" class="copy"></button><span class="lang">python</span><pre class="shiki"><code><span class="line"><span style="color:#89DDFF;">&quot;&quot;&quot;</span></span>
 <span class="line"><span style="color:#676E95;">redis bitmap 用户签到</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#676E95;">Python 3.8.13</span></span>
@@ -210,4 +200,4 @@ import{_ as s,o as n,c as a,a as l}from"./app.06916134.js";const i=JSON.parse('{
 <span class="line"><span style="color:#A6ACCD;">    </span><span style="color:#676E95;"># 当月签到详情v2</span></span>
 <span class="line"><span style="color:#A6ACCD;">    </span><span style="color:#676E95;"># print(us.get_sign_info_v2(_uid, _date))</span></span>
 <span class="line"></span>
-<span class="line"></span></code></pre></div><h4 id="bitmap应用总结" tabindex="-1">bitmap应用总结 <a class="header-anchor" href="#bitmap应用总结" aria-hidden="true">#</a></h4><p>位图优点是内存开销小，效率高且操作简单；缺点是位计算和位表示数值的局限。String类型最大长度为512M。 注意SETBIT时的偏移量，当偏移量很大时，可能会有较大耗时。 位图不是绝对的好，有时可能更浪费空间。</p><p>参考：<br><a href="https://redis.io/commands/bitfield/" target="_blank" rel="noreferrer">[Redis.io Docs] redis.io/commands</a></p>`,22),e=[o];function t(c,r,D,F,y,A){return n(),a("div",null,e)}const d=s(p,[["render",t]]);export{i as __pageData,d as default};
+<span class="line"></span></code></pre></div>`,16),e=[o];function t(c,r,D,F,y,A){return n(),a("div",null,e)}const d=s(l,[["render",t]]);export{i as __pageData,d as default};
