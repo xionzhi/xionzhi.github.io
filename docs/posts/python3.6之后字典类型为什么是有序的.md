@@ -33,7 +33,7 @@ for k, v in reversed(tel.items())
 ```
 
 在之前版本中(python3.5)，PyPy字典以及CPython字典的实现如下（简化视图）
-```c++
+```c
 /* python3.5 */
 struct dict {
    long num_items;
